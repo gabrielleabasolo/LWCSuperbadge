@@ -58,6 +58,7 @@ export default class BoatSearchResults extends LightningElement {
     // uses notifyLoading
     @api
     async refresh() {
+        console.log('refresh');
         this.isLoading = true;
         this.notifyLoading(this.isLoading);      
         await refreshApex(this.boats);
