@@ -1,7 +1,11 @@
 <template>
   <lightning-layout>
-      <lightning-layout-item class="slds-align-middle">
-          <lightning-combobox value={selectedBoatTypeId} options={searchOptions} onchange={handleSearchOptionChange} class="slds-align-middle"></lightning-combobox>
-      </lightning-layout-item>
+    <lightning-layout-item class="slds-align-middle">
+      <lightning-combobox value={selectedBoatTypeId} options={searchOptions} onchange={handleSearchOptionChange} class="slds-align-middle"></lightning-combobox>
+    </lightning-layout-item>
+
+    <lightning-layout-item class="slds-align-middle">
+      <lightning-input type="number" field-name="Boat length" value={boatLength} onchange={handleLengthChange} class="slds-align-middle"></lightning-input>
+    </lightning-layout-item>
   </lightning-layout>
 </template>
