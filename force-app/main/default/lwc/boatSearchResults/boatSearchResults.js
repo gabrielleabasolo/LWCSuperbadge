@@ -23,6 +23,7 @@ export default class BoatSearchResults extends LightningElement {
         { label: 'Description', fieldName: 'Description__c' , editable: true},        
     ];
     boatTypeId = '';
+    boatLength = null;
 
     boats;
     isLoading = false;
@@ -34,11 +35,10 @@ export default class BoatSearchResults extends LightningElement {
     messageContext;
 
     // wired getBoats method
-    @wire(getBoats, {boatTypeId: '$boatTypeId'})
+    @wire(getBoats, {boatTypeId: '$boatTypeId', boatLength: '$boatLength'})
     wiredBoats({data, error}) {
         if (data) {
             this.boats = data;
-            console.log(this.boats);
         } else if (error) {
             console.log('data.error')
             console.log(error)
@@ -48,10 +48,11 @@ export default class BoatSearchResults extends LightningElement {
     // public function that updates the existing boatTypeId property
     // uses notifyLoading
     @api
-    searchBoats(boatTypeId) {
+    searchBoats(boatTypeId, boatLength) {
         this.isLoading = true;
         this.notifyLoading(this.isLoading);
         this.boatTypeId = boatTypeId;
+        this.boatLength = boatLength;
     }
   
     // this public function must refresh the boats asynchronously

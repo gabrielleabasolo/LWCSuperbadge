@@ -3,7 +3,7 @@ import { NavigationMixin } from 'lightning/navigation';
 
 export default class BoatSearch extends NavigationMixin(LightningElement) {
     isLoading = false;
-    
+
     // Handles loading event
     handleLoading() {
         this.isLoading = true;
@@ -17,7 +17,7 @@ export default class BoatSearch extends NavigationMixin(LightningElement) {
     // Handles search boat event
     // This custom event comes from the form
     searchBoats(event) {
-        let boatTypeId = event.detail.boatTypeId;
+        let boatId = event.detail.boatTypeId;
         this.template.querySelector('c-boat-search-results').searchBoats(boatTypeId);
         this.handleDoneLoading();
     }
