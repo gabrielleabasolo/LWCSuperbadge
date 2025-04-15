@@ -24,7 +24,7 @@ export default class BoatSearchResults extends LightningElement {
         { label: 'Description', fieldName: 'Description__c' , editable: true},        
     ];
     boatTypeId = '';
-    boatLength = null;
+    boatLength = 6;
 
     boats;
     isLoading = false;
@@ -36,10 +36,12 @@ export default class BoatSearchResults extends LightningElement {
     messageContext;
 
     // wired getBoats method
-    @wire(getBoats, {boatTypeId: '$boatTypeId', boatLength: '$boatLength'})
+    @wire(getBoats, {boatTypeId: '$boatTypeId', length: '$boatLength'})
     wiredBoats({data, error}) {
         if (data) {
             this.boats = data;
+            console.log('length: ' + this.boatLength);
+            console.log('Datas: ', data);
         } else if (error) {
             console.log('data.error')
             console.log(error)
@@ -53,12 +55,7 @@ export default class BoatSearchResults extends LightningElement {
         this.isLoading = true;
         this.notifyLoading(this.isLoading);
         this.boatTypeId = boatTypeId;
-        if(!boatLength) {
-            this.boatLength = boatLength;
-            console.log('boatLength IS: ' , this.boatLength);
-        }else{
-            this.boatLength = null;
-        }
+        this.boatLength = boatLength;
     }
   
     // this public function must refresh the boats asynchronously

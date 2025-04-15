@@ -25,7 +25,7 @@ export default class BoatSearchForm extends LightningElement {
     }
     
     handleLengthChange(event) {
-        this.boatLength = event.detail.value;
+        this.boatLength = Number(event.detail.value);
         this.fireSearchEvent();
     }
 
@@ -37,7 +37,6 @@ export default class BoatSearchForm extends LightningElement {
     }
 
     fireSearchEvent() {
-        console.log('BoatId: ' + this.selectedBoatTypeId + ' BoatLength: ' + this.boatLength);
         // Fire the custom event)
         const searchEvent = new CustomEvent('search', {
             detail: {
