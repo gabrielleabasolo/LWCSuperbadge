@@ -19,7 +19,6 @@ export default class BoatSearch extends NavigationMixin(LightningElement) {
     searchBoats(event) {
         let boatId = event.detail.boatTypeId;
         let boatLength = event.detail.boatLength;
-        console.log(event.detail.boatlength)
         this.template.querySelector('c-boat-search-results').searchBoats(boatId, boatLength);
         this.handleDoneLoading();
     }

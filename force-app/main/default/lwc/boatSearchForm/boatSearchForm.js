@@ -4,7 +4,7 @@ import getBoatTypes from '@salesforce/apex/BoatDataService.getBoatTypes';
 export default class BoatSearchForm extends LightningElement {
     
     selectedBoatTypeId = '';
-    boatLength = null;
+    boatLength;
     // Private
     error = undefined;
     
@@ -25,23 +25,24 @@ export default class BoatSearchForm extends LightningElement {
     }
     
     handleLengthChange(event) {
-        this.boatLength = event.target.value;
-        const searchEvent = new CustomEvent('search', {
-            detail: {
-                boatLength: this.boatLength
-            }
-        })
-        this.dispatchEvent(searchEvent);
+        this.boatLength = event.detail.value;
+        this.fireSearchEvent();
     }
 
     // Fires event that the search option has changed.
     // passes boatTypeId (value of this.selectedBoatTypeId) in the detail
     handleSearchOptionChange(event) {
         this.selectedBoatTypeId = event.detail.value;
-        // Create the const searchEvent
-        const searchEvent = new CustomEvent('search', { 
+        this.fireSearchEvent();
+    }
+
+    fireSearchEvent() {
+        console.log('BoatId: ' + this.selectedBoatTypeId + ' BoatLength: ' + this.boatLength);
+        // Fire the custom event)
+        const searchEvent = new CustomEvent('search', {
             detail: {
-                boatTypeId: this.selectedBoatTypeId
+                boatTypeId: this.selectedBoatTypeId,
+                boatLength: this.boatLength
             }
         });
         this.dispatchEvent(searchEvent);

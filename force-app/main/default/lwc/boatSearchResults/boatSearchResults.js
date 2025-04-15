@@ -16,6 +16,7 @@ const ERROR_VARIANT = 'error';
 export default class BoatSearchResults extends LightningElement {
     @api
     selectedBoatId;
+    
     columns = [
         { label: 'Name', fieldName: 'Name', editable: true },
         { label: 'Length', fieldName: 'Length__c', type: 'number', editable: true },
@@ -38,7 +39,6 @@ export default class BoatSearchResults extends LightningElement {
     @wire(getBoats, {boatTypeId: '$boatTypeId', boatLength: '$boatLength'})
     wiredBoats({data, error}) {
         if (data) {
-            console.log('search Results' + data);
             this.boats = data;
         } else if (error) {
             console.log('data.error')
@@ -53,7 +53,12 @@ export default class BoatSearchResults extends LightningElement {
         this.isLoading = true;
         this.notifyLoading(this.isLoading);
         this.boatTypeId = boatTypeId;
-        this.boatLength = boatLength;
+        if(boatLength != '') {
+            this.boatLength = boatLength;
+            console.log('boatLength IS: ' , this.boatLength);
+        }else{
+            this.boatLength = null;
+        }
     }
   
     // this public function must refresh the boats asynchronously
