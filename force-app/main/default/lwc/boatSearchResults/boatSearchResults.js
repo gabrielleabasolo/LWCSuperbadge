@@ -53,7 +53,7 @@ export default class BoatSearchResults extends LightningElement {
         this.isLoading = true;
         this.notifyLoading(this.isLoading);
         this.boatTypeId = boatTypeId;
-        if(boatLength != '') {
+        if(!boatLength) {
             this.boatLength = boatLength;
             console.log('boatLength IS: ' , this.boatLength);
         }else{
